@@ -210,7 +210,6 @@ impl DiscoveryConfig {
 			let mut config = KademliaConfig::default();
 
 			if let Some(replication_factor) = kademlia_replication_factor {
-				dbg!(&kademlia_replication_factor);
 				config.set_replication_factor(replication_factor);
 			}
 

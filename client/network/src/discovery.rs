@@ -100,6 +100,7 @@ pub struct DiscoveryConfig {
 	discovery_only_if_under_num: u64,
 	enable_mdns: bool,
 	kademlia_disjoint_query_paths: bool,
+	kademlia_replication_factor: Option<NonZeroUsize>,
 	kademlia_protocols: Vec<Vec<u8>>,
 }
 
@@ -115,6 +116,7 @@ impl DiscoveryConfig {
 			discovery_only_if_under_num: std::u64::MAX,
 			enable_mdns: false,
 			kademlia_disjoint_query_paths: false,
+			kademlia_replication_factor: None,
 			kademlia_protocols: Vec::new(),
 		}
 	}
@@ -182,6 +184,11 @@ impl DiscoveryConfig {
 		self
 	}
 
+	pub fn with_kademlia_replication_factor(&mut self, value: NonZeroUsize) -> &mut Self {
+		self.kademlia_replication_factor = Some(value);
+		self
+	}
+
 	/// Create a `DiscoveryBehaviour` from this config.
 	pub fn finish(self) -> DiscoveryBehaviour {
 		let Self {
@@ -194,10 +201,16 @@ impl DiscoveryConfig {
 			enable_mdns,
 			kademlia_disjoint_query_paths,
 			kademlia_protocols,
+			kademlia_replication_factor,
 		} = self;
 
 		let kademlia = if !kademlia_protocols.is_empty() {
 			let mut config = KademliaConfig::default();
+
+			if let Some(replication_factor) = kademlia_replication_factor {
+				config.set_replication_factor(replication_factor);
+			}
+
 			config.set_protocol_names(kademlia_protocols.into_iter().map(Into::into).collect());
 			// By default Kademlia attempts to insert all peers into its routing table once a
 			// dialing attempt succeeds. In order to control which peer is added, disable the

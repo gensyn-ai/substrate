@@ -28,7 +28,7 @@ use sc_service::{
 	config::{Multiaddr, MultiaddrWithPeerId},
 	ChainSpec, ChainType,
 };
-use std::{borrow::Cow, path::PathBuf};
+use std::{borrow::Cow, num::NonZeroUsize, path::PathBuf};
 
 /// Parameters used to create the network configuration.
 #[derive(Debug, Clone, Args)]
@@ -113,6 +113,12 @@ pub struct NetworkParams {
 	/// `Local`/`Development` and false otherwise.
 	#[arg(long)]
 	pub discover_local: bool,
+
+	/// Kademlia replication factor determines to how many closest peers a record is replicated to.
+	/// Default value is 20. Discovery mechanism requires successful replication to all
+	/// `kademlia_replication_factor` peers to consider record successfully put.
+	#[arg(long)]
+	pub kademlia_replication_factor: Option<NonZeroUsize>,
 
 	/// Require iterative Kademlia DHT queries to use disjoint paths for increased resiliency in
 	/// the presence of potentially adversarial nodes.
@@ -235,6 +241,7 @@ impl NetworkParams {
 			enable_dht_random_walk: !self.reserved_only,
 			allow_non_globals_in_dht,
 			kademlia_disjoint_query_paths: self.kademlia_disjoint_query_paths,
+			kademlia_replication_factor: self.kademlia_replication_factor,
 			yamux_window_size: None,
 			ipfs_server: self.ipfs_server,
 			sync_mode: self.sync.into(),

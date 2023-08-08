@@ -601,7 +601,7 @@ fn reduce_all<A: IdentifierT>(assignments: &mut Vec<StakedAssignment<A>>) -> u32
 
 				// re-org.
 				if should_reorg {
-					let min_edge = vec![min_voter, min_target];
+					let min_edge = sp_std::vec![min_voter, min_target];
 					if min_chain_in_voter {
 						// NOTE: safe; voter_root_path is always bigger than 1 element.
 						for i in 0..voter_root_path.len() - 1 {

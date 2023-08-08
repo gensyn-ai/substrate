@@ -798,7 +798,7 @@ impl<T: Config> Pallet<T> {
 				let self_vote = (
 					voter.clone(),
 					weight_of(&voter),
-					vec![voter.clone()]
+					sp_std::vec![voter.clone()]
 						.try_into()
 						.expect("`MaxVotesPerVoter` must be greater than or equal to 1"),
 				);
@@ -1237,7 +1237,7 @@ where
 	T: Config + pallet_authorship::Config + pallet_session::Config,
 {
 	fn note_author(author: T::AccountId) {
-		Self::reward_by_ids(vec![(author, 20)])
+		Self::reward_by_ids(sp_std::vec![(author, 20)])
 	}
 }
 

@@ -717,7 +717,7 @@ pub struct Exposure<AccountId, Balance: HasCompact> {
 
 impl<AccountId, Balance: Default + HasCompact> Default for Exposure<AccountId, Balance> {
 	fn default() -> Self {
-		Self { total: Default::default(), own: Default::default(), others: vec![] }
+		Self { total: Default::default(), own: Default::default(), others: Vec::new() }
 	}
 }
 
@@ -743,8 +743,8 @@ impl<AccountId, Balance: HasCompact + Zero> UnappliedSlash<AccountId, Balance> {
 		Self {
 			validator,
 			own: Zero::zero(),
-			others: vec![],
-			reporters: vec![],
+			others: Vec::new(),
+			reporters: Vec::new(),
 			payout: Zero::zero(),
 		}
 	}

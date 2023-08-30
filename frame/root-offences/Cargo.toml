@@ -13,10 +13,16 @@ readme = "README.md"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "derive",
+] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 
-pallet-session = { version = "4.0.0-dev", features = [ "historical" ], path = "../../frame/session", default-features = false }
+pallet-session = { version = "4.0.0-dev", features = [
+  "historical",
+], path = "../../frame/session", default-features = false }
 pallet-staking = { version = "4.0.0-dev", default-features = false, path = "../../frame/staking" }
 
 frame-support = { version = "4.0.0-dev", default-features = false, path = "../support" }
@@ -40,11 +46,11 @@ runtime-benchmarks = []
 try-runtime = ["frame-support/try-runtime"]
 default = ["std"]
 std = [
-	"codec/std",
-	"frame-support/std",
-    "frame-system/std",
-	"pallet-session/std",
-	"pallet-staking/std",
-	"scale-info/std",
-	"sp-runtime/std",
+  "codec/std",
+  "frame-support/std",
+  "frame-system/std",
+  "pallet-session/std",
+  "pallet-staking/std",
+  "scale-info/std",
+  "sp-runtime/std",
 ]

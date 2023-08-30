@@ -13,8 +13,12 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 # parity
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "derive",
+] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 
 # primitives
 sp-runtime = { version = "7.0.0", default-features = false, path = "../../primitives/runtime" }
@@ -36,8 +40,8 @@ sp-io = { version = "7.0.0", path = "../../primitives/io", optional = true, defa
 sp-tracing = { version = "6.0.0", path = "../../primitives/tracing", optional = true, default-features = false }
 
 [dev-dependencies]
-sp-core = { version = "7.0.0", path = "../../primitives/core"}
-sp-io = { version = "7.0.0", path = "../../primitives/io"}
+sp-core = { version = "7.0.0", path = "../../primitives/core" }
+sp-io = { version = "7.0.0", path = "../../primitives/io" }
 sp-tracing = { version = "6.0.0", path = "../../primitives/tracing" }
 pallet-balances = { version = "4.0.0-dev", path = "../balances" }
 frame-election-provider-support = { version = "4.0.0-dev", path = "../election-provider-support" }
@@ -46,33 +50,36 @@ frame-benchmarking = { version = "4.0.0-dev", path = "../benchmarking" }
 [features]
 default = ["std"]
 std = [
-	"sp-tracing?/std",
-	"sp-io?/std",
-	"sp-core?/std",
-	"pallet-balances?/std",
-	"frame-benchmarking?/std",
-	"scale-info/std",
-	"codec/std",
-	"sp-runtime/std",
-	"sp-std/std",
-	"frame-support/std",
-	"frame-system/std",
-	"frame-election-provider-support/std",
-	"log/std",
+  "sp-tracing?/std",
+  "sp-io?/std",
+  "sp-core?/std",
+  "pallet-balances?/std",
+  "frame-benchmarking?/std",
+  "scale-info/std",
+  "codec/std",
+  "sp-runtime/std",
+  "sp-std/std",
+  "frame-support/std",
+  "frame-system/std",
+  "frame-election-provider-support/std",
+  "log/std",
 ]
 runtime-benchmarks = [
-	"frame-benchmarking/runtime-benchmarks",
-	"sp-core",
-	"sp-io",
-	"pallet-balances/runtime-benchmarks",
-	"sp-tracing",
-	"frame-election-provider-support/runtime-benchmarks",
+  "frame-benchmarking/runtime-benchmarks",
+  "sp-core",
+  "sp-io",
+  "pallet-balances/runtime-benchmarks",
+  "sp-tracing",
+  "frame-election-provider-support/runtime-benchmarks",
 ]
 fuzz = [
-	"sp-core",
-	"sp-io",
-	"pallet-balances",
-	"sp-tracing",
-	"frame-election-provider-support/fuzz",
+  "sp-core",
+  "sp-io",
+  "pallet-balances",
+  "sp-tracing",
+  "frame-election-provider-support/fuzz",
 ]
-try-runtime = [ "frame-support/try-runtime", "frame-election-provider-support/try-runtime" ]
+try-runtime = [
+  "frame-support/try-runtime",
+  "frame-election-provider-support/try-runtime",
+]

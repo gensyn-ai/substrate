@@ -39,16 +39,16 @@ assert_matches = "1.5"
 [features]
 default = ["std"]
 std = [
-	"codec/std",
-	"hash-db/std",
-	"log/std",
-	"parking_lot",
-	"rand",
-	"sp-core/std",
-	"sp-externalities/std",
-	"sp-panic-handler",
-	"sp-std/std",
-	"sp-trie/std",
-	"thiserror",
-	"tracing",
+  "codec/std",
+  "hash-db/std",
+  "log/std",
+  "parking_lot",
+  "rand",
+  "sp-core/std",
+  "sp-externalities/std",
+  "sp-panic-handler",
+  "sp-std/std",
+  "sp-trie/std",
+  "thiserror",
+  "tracing",
 ]

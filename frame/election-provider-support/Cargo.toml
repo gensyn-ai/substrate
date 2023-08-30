@@ -12,8 +12,12 @@ description = "election provider supporting traits"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "derive",
+] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 frame-election-provider-solution-type = { version = "4.0.0-dev", path = "solution-type" }
 frame-support = { version = "4.0.0-dev", default-features = false, path = "../support" }
 frame-system = { version = "4.0.0-dev", default-features = false, path = "../system" }
@@ -32,15 +36,15 @@ sp-npos-elections = { version = "4.0.0-dev", path = "../../primitives/npos-elect
 default = ["std"]
 fuzz = ["default"]
 std = [
-	"codec/std",
-	"frame-support/std",
-	"frame-system/std",
-	"scale-info/std",
-	"sp-arithmetic/std",
-	"sp-npos-elections/std",
-	"sp-core/std",
-	"sp-runtime/std",
-	"sp-std/std",
+  "codec/std",
+  "frame-support/std",
+  "frame-system/std",
+  "scale-info/std",
+  "sp-arithmetic/std",
+  "sp-npos-elections/std",
+  "sp-core/std",
+  "sp-runtime/std",
+  "sp-std/std",
 ]
 runtime-benchmarks = []
 try-runtime = []

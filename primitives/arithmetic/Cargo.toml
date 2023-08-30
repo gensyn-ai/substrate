@@ -15,12 +15,14 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
-	"derive",
-	"max-encoded-len",
+  "derive",
+  "max-encoded-len",
 ] }
 integer-sqrt = "0.1.2"
 num-traits = { version = "0.2.8", default-features = false }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 serde = { version = "1.0.136", features = ["derive"], optional = true }
 static_assertions = "1.1.0"
 sp-std = { version = "5.0.0", default-features = false, path = "../std" }
@@ -33,13 +35,7 @@ rand = "0.8.5"
 
 [features]
 default = ["std"]
-std = [
-	"codec/std",
-	"num-traits/std",
-	"scale-info/std",
-	"serde",
-	"sp-std/std",
-]
+std = ["codec/std", "num-traits/std", "scale-info/std", "serde", "sp-std/std"]
 
 [[bench]]
 name = "bench"

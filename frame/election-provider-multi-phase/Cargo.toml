@@ -13,10 +13,10 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
-	"derive",
+  "derive",
 ] }
 scale-info = { version = "2.5.0", default-features = false, features = [
-	"derive",
+  "derive",
 ] }
 log = { version = "0.4.17", default-features = false }
 
@@ -34,8 +34,13 @@ frame-election-provider-support = { version = "4.0.0-dev", default-features = fa
 # Optional imports for benchmarking
 frame-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../benchmarking", optional = true }
 pallet-election-provider-support-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../election-provider-support/benchmarking", optional = true }
-rand = { version = "0.8.5", default-features = false, features = ["alloc", "small_rng"], optional = true }
-strum = { version = "0.24.1",  default-features = false, features = ["derive"], optional = true }
+rand = { version = "0.8.5", default-features = false, features = [
+  "alloc",
+  "small_rng",
+], optional = true }
+strum = { version = "0.24.1", default-features = false, features = [
+  "derive",
+], optional = true }
 
 [dev-dependencies]
 parking_lot = "0.12.1"
@@ -50,31 +55,31 @@ frame-benchmarking = { version = "4.0.0-dev", path = "../benchmarking" }
 [features]
 default = ["std"]
 std = [
-	"pallet-election-provider-support-benchmarking?/std",
-	"codec/std",
-	"scale-info/std",
-	"log/std",
+  "pallet-election-provider-support-benchmarking?/std",
+  "codec/std",
+  "scale-info/std",
+  "log/std",
 
-	"frame-support/std",
-	"frame-system/std",
+  "frame-support/std",
+  "frame-system/std",
 
-	"sp-io/std",
-	"sp-std/std",
-	"sp-core/std",
-	"sp-runtime/std",
-	"sp-npos-elections/std",
-	"sp-arithmetic/std",
-	"frame-election-provider-support/std",
-	"log/std",
+  "sp-io/std",
+  "sp-std/std",
+  "sp-core/std",
+  "sp-runtime/std",
+  "sp-npos-elections/std",
+  "sp-arithmetic/std",
+  "frame-election-provider-support/std",
+  "log/std",
 
-	"frame-benchmarking?/std",
-	"rand/std",
-	"strum/std",
+  "frame-benchmarking?/std",
+  "rand/std",
+  "strum/std",
 ]
 runtime-benchmarks = [
-	"frame-benchmarking/runtime-benchmarks",
-	"frame-election-provider-support/runtime-benchmarks",
-	"rand",
-	"strum",
+  "frame-benchmarking/runtime-benchmarks",
+  "frame-election-provider-support/runtime-benchmarks",
+  "rand",
+  "strum",
 ]
 try-runtime = ["frame-support/try-runtime"]

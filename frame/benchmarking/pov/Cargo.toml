@@ -13,7 +13,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 frame-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../" }
 frame-support = { version = "4.0.0-dev", default-features = false, path = "../../support" }
 frame-system = { version = "4.0.0-dev", default-features = false, path = "../../system" }
@@ -24,20 +26,17 @@ sp-std = { version = "5.0.0", default-features = false, path = "../../../primiti
 [features]
 default = ["std"]
 std = [
-	"codec/std",
-	"frame-benchmarking/std",
-	"frame-support/std",
-	"frame-system/std",
-	"scale-info/std",
-	"sp-io/std",
-	"sp-runtime/std",
-	"sp-std/std",
+  "codec/std",
+  "frame-benchmarking/std",
+  "frame-support/std",
+  "frame-system/std",
+  "scale-info/std",
+  "sp-io/std",
+  "sp-runtime/std",
+  "sp-std/std",
 ]
 runtime-benchmarks = [
-	"frame-system/runtime-benchmarks",
-	"frame-benchmarking/runtime-benchmarks",
+  "frame-system/runtime-benchmarks",
+  "frame-benchmarking/runtime-benchmarks",
 ]
-try-runtime = [
-	"frame-support/try-runtime",
-	"frame-system/try-runtime",
-]
+try-runtime = ["frame-support/try-runtime", "frame-system/try-runtime"]

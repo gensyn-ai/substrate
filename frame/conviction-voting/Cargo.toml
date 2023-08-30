@@ -15,10 +15,12 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 assert_matches = "1.3.0"
 codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
-	"derive",
-	"max-encoded-len",
+  "derive",
+  "max-encoded-len",
 ] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 serde = { version = "1.0.136", features = ["derive"], optional = true }
 frame-benchmarking = { version = "4.0.0-dev", default-features = false, optional = true, path = "../benchmarking" }
 frame-support = { version = "4.0.0-dev", default-features = false, path = "../support" }
@@ -35,21 +37,21 @@ sp-core = { version = "7.0.0", path = "../../primitives/core" }
 [features]
 default = ["std"]
 std = [
-	"codec/std",
-	"frame-benchmarking?/std",
-	"frame-support/std",
-	"frame-system/std",
-	"scale-info/std",
-	"serde",
-	"sp-io/std",
-	"sp-runtime/std",
-	"sp-std/std",
+  "codec/std",
+  "frame-benchmarking?/std",
+  "frame-support/std",
+  "frame-system/std",
+  "scale-info/std",
+  "serde",
+  "sp-io/std",
+  "sp-runtime/std",
+  "sp-std/std",
 ]
 runtime-benchmarks = [
-	"frame-support/runtime-benchmarks",
-	"frame-benchmarking/runtime-benchmarks",
-	"frame-support/runtime-benchmarks",
-	"frame-system/runtime-benchmarks",
-	"sp-runtime/runtime-benchmarks",
+  "frame-support/runtime-benchmarks",
+  "frame-benchmarking/runtime-benchmarks",
+  "frame-support/runtime-benchmarks",
+  "frame-system/runtime-benchmarks",
+  "sp-runtime/runtime-benchmarks",
 ]
 try-runtime = ["frame-support/try-runtime"]

@@ -13,8 +13,13 @@ readme = "README.md"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive", "max-encoded-len"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "derive",
+  "max-encoded-len",
+] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 frame-support = { version = "4.0.0-dev", default-features = false, path = "../support" }
 frame-system = { version = "4.0.0-dev", default-features = false, path = "../system" }
 pallet-timestamp = { version = "4.0.0-dev", default-features = false, path = "../timestamp" }
@@ -30,14 +35,14 @@ sp-io = { version = "7.0.0", path = "../../primitives/io" }
 [features]
 default = ["std"]
 std = [
-	"codec/std",
-	"frame-support/std",
-	"frame-system/std",
-	"pallet-timestamp/std",
-	"scale-info/std",
-	"sp-application-crypto/std",
-	"sp-consensus-aura/std",
-	"sp-runtime/std",
-	"sp-std/std",
+  "codec/std",
+  "frame-support/std",
+  "frame-system/std",
+  "pallet-timestamp/std",
+  "scale-info/std",
+  "sp-application-crypto/std",
+  "sp-consensus-aura/std",
+  "sp-runtime/std",
+  "sp-std/std",
 ]
 try-runtime = ["frame-support/try-runtime"]

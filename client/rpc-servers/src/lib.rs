@@ -44,6 +44,14 @@ const MEGABYTE: u32 = 1024 * 1024;
 /// Type alias for the JSON-RPC server.
 pub type Server = ServerHandle;
 
+/// Type to encapsulate the server handle and listening address.
+pub struct ServerAndListenAddress {
+	/// Handle to the rpc server
+	pub handle: Server,
+	/// Listening address of the server
+	pub listen_addr: SocketAddr,
+}
+
 /// RPC server configuration.
 #[derive(Debug)]
 pub struct Config<'a, M: Send + Sync + 'static> {
@@ -70,9 +78,9 @@ pub struct Config<'a, M: Send + Sync + 'static> {
 }
 
 /// Start RPC server listening on given address.
-pub async fn start_server<M: Send + Sync + 'static>(
+pub async fn start_server_and_get_listen_address<M: Send + Sync + 'static>(
 	config: Config<'_, M>,
-) -> Result<ServerHandle, Box<dyn StdError + Send + Sync>> {
+) -> Result<ServerAndListenAddress, Box<dyn StdError + Send + Sync>> {
 	let Config {
 		addrs,
 		cors,
@@ -110,23 +118,33 @@ pub async fn start_server<M: Send + Sync + 'static>(
 	};
 
 	let rpc_api = build_rpc_api(rpc_api);
-	let (handle, addr) = if let Some(metrics) = metrics {
+	let (handle, listen_addr) = if let Some(metrics) = metrics {
 		let server = builder.set_logger(metrics).build(&addrs[..]).await?;
-		let addr = server.local_addr();
-		(server.start(rpc_api)?, addr)
+		let listen_addr = server.local_addr()?;
+		(server.start(rpc_api)?, listen_addr)
 	} else {
 		let server = builder.build(&addrs[..]).await?;
-		let addr = server.local_addr();
-		(server.start(rpc_api)?, addr)
+		let listen_addr = server.local_addr()?;
+		(server.start(rpc_api)?, listen_addr)
 	};
 
 	log::info!(
 		"Running JSON-RPC server: addr={}, allowed origins={}",
-		addr.map_or_else(|_| "unknown".to_string(), |a| a.to_string()),
+		listen_addr.to_string(),
 		format_cors(cors)
 	);
 
-	Ok(handle)
+	Ok(ServerAndListenAddress { handle, listen_addr })
+}
+
+/// Start RPC server listening on given address, does not return socket address for backwards
+/// compatibility
+pub async fn start_server<M: Send + Sync + 'static>(
+	config: Config<'_, M>,
+) -> Result<ServerHandle, Box<dyn StdError + Send + Sync>> {
+	start_server_and_get_listen_address(config)
+		.await
+		.map(|handle_and_address| handle_and_address.handle)
 }
 
 fn hosts_filtering(enabled: bool, addrs: &[SocketAddr]) -> AllowHosts {

@@ -85,7 +85,7 @@ jobs:
 
     - in_parallel:
       - task: pr-check-rust-formatting
-        timeout: 10m
+        timeout: 15m
         image: env-glibc
         config:
           platform: linux
@@ -146,7 +146,7 @@ jobs:
 
       - do:
         - task: pr-check-cargo-build
-          timeout: 40m
+          timeout: 60m
           image: env-glibc
           config:
             platform: linux
@@ -193,102 +193,102 @@ jobs:
               context: cargo-build
               status: failure
 
-      - task: pr-check-clippy
-        timeout: 20m
-        image: env-glibc
-        config:
-          platform: linux
-          inputs:
-          - name: git-pull-request-resource
-          caches:
-          - path: target
-          - path: cargo
+        - task: pr-check-clippy
+          timeout: 60m
+          image: env-glibc
+          config:
+            platform: linux
+            inputs:
+            - name: git-pull-request-resource
+            caches:
+            - path: target
+            - path: cargo
 
-          run:
-            # user: root
-            dir: git-pull-request-resource
-            path: sh
-            args:
-            - -exc
-            - |
-              export CARGO_HOME="$(pwd)/../cargo"
-              export CARGO_TARGET_DIR="$(pwd)/../target"
-              export CARGO_INCREMENTAL=0
+            run:
+              # user: root
+              dir: git-pull-request-resource
+              path: sh
+              args:
+              - -exc
+              - |
+                export CARGO_HOME="$(pwd)/../cargo"
+                export CARGO_TARGET_DIR="$(pwd)/../target"
+                export CARGO_INCREMENTAL=0
 
-              sudo chown $(whoami): -Rf ${CARGO_HOME}
-              sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
-              sudo chown $(whoami): -Rf .
+                sudo chown $(whoami): -Rf ${CARGO_HOME}
+                sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
+                sudo chown $(whoami): -Rf .
 
-              rustup +nightly target add wasm32-unknown-unknown
-              rustup +stable target add wasm32-unknown-unknown
-              rustup +stable target add x86_64-unknown-linux-gnu
-              cargo +nightly --version
-              cargo +stable --version
-              rustc +stable --version
-              rustc +nightly --version
+                rustup +nightly target add wasm32-unknown-unknown
+                rustup +stable target add wasm32-unknown-unknown
+                rustup +stable target add x86_64-unknown-linux-gnu
+                cargo +nightly --version
+                cargo +stable --version
+                rustc +stable --version
+                rustc +nightly --version
 
-              cargo clippy --workspace
+                cargo clippy --workspace
 
-        on_success:
-          put: git-pull-request-resource
-          params:
-            path: git-pull-request-resource
-            context: cargo-clippy
-            status: success
-        on_failure:
-          put: git-pull-request-resource
-          params:
-            path: git-pull-request-resource
-            context: cargo-clippy
-            status: failure
+          on_success:
+            put: git-pull-request-resource
+            params:
+              path: git-pull-request-resource
+              context: cargo-clippy
+              status: success
+          on_failure:
+            put: git-pull-request-resource
+            params:
+              path: git-pull-request-resource
+              context: cargo-clippy
+              status: failure
 
-      - task: pr-check-cargo-test
-        timeout: 40m
-        image: env-glibc
-        config:
-          platform: linux
-          inputs:
-          - name: git-pull-request-resource
-          caches:
-          - path: cargo
-          - path: target
-          run:
-            # user: root
-            dir: git-pull-request-resource
-            path: sh
-            args:
-            - -exc
-            - |
-              export CARGO_HOME="$(pwd)/../cargo"
-              export CARGO_TARGET_DIR="$(pwd)/../target"
-              export CARGO_INCREMENTAL=0
+        - task: pr-check-cargo-test
+          timeout: 60m
+          image: env-glibc
+          config:
+            platform: linux
+            inputs:
+            - name: git-pull-request-resource
+            caches:
+            - path: cargo
+            - path: target
+            run:
+              # user: root
+              dir: git-pull-request-resource
+              path: sh
+              args:
+              - -exc
+              - |
+                export CARGO_HOME="$(pwd)/../cargo"
+                export CARGO_TARGET_DIR="$(pwd)/../target"
+                export CARGO_INCREMENTAL=0
 
-              sudo chown $(whoami): -Rf ${CARGO_HOME}
-              sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
-              sudo chown $(whoami): -Rf .
+                sudo chown $(whoami): -Rf ${CARGO_HOME}
+                sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
+                sudo chown $(whoami): -Rf .
 
-              rustup +nightly target add wasm32-unknown-unknown
-              rustup target add wasm32-unknown-unknown
-              rustup +stable target add x86_64-unknown-linux-gnu
-              cargo +nightly --version
-              cargo +stable --version
-              rustc +stable --version
-              rustc +nightly --version
+                rustup +nightly target add wasm32-unknown-unknown
+                rustup target add wasm32-unknown-unknown
+                rustup +stable target add x86_64-unknown-linux-gnu
+                cargo +nightly --version
+                cargo +stable --version
+                rustc +stable --version
+                rustc +nightly --version
 
-              cargo +stable test
+                cargo +stable test
 
-        on_success:
-          put: git-pull-request-resource
-          params:
-            path: git-pull-request-resource
-            context: cargo-test
-            status: success
-        on_failure:
-          put: git-pull-request-resource
-          params:
-            path: git-pull-request-resource
-            context: cargo-test
-            status: failure
+          on_success:
+            put: git-pull-request-resource
+            params:
+              path: git-pull-request-resource
+              context: cargo-test
+              status: success
+          on_failure:
+            put: git-pull-request-resource
+            params:
+              path: git-pull-request-resource
+              context: cargo-test
+              status: failure
 
   ####################################################################################
   #                                 M A S T E R
@@ -306,75 +306,75 @@ jobs:
         trigger: true
 
     - in_parallel:
-      - task: verify-cargo-build
-        timeout: 40m
-        image: env-glibc
-        config:
-          platform: linux
-          inputs:
-          - name: git-repo
-          outputs:
-          - name: binary
-          caches:
-          - path: cargo
-          - path: target
-          run:
-            # user: root
-            dir: git-repo
-            path: sh
-            args:
-            - -exc
-            - |
-              export RUST_BACKTRACE=full
-              export CARGO_HOME="$(pwd)/../cargo"
-              export CARGO_TARGET_DIR="$(pwd)/../target"
-              export CARGO_INCREMENTAL=0
+      - do:
+        - task: verify-cargo-build
+          timeout: 60m
+          image: env-glibc
+          config:
+            platform: linux
+            inputs:
+            - name: git-repo
+            outputs:
+            - name: binary
+            caches:
+            - path: cargo
+            - path: target
+            run:
+              # user: root
+              dir: git-repo
+              path: sh
+              args:
+              - -exc
+              - |
+                export RUST_BACKTRACE=full
+                export CARGO_HOME="$(pwd)/../cargo"
+                export CARGO_TARGET_DIR="$(pwd)/../target"
+                export CARGO_INCREMENTAL=0
 
-              sudo chown $(whoami): -Rf ${CARGO_HOME}
-              sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
-              sudo chown $(whoami): -Rf .
-              sudo chown $(whoami): -Rf ../binary
+                sudo chown $(whoami): -Rf ${CARGO_HOME}
+                sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
+                sudo chown $(whoami): -Rf .
+                sudo chown $(whoami): -Rf ../binary
 
-              rustup target add wasm32-unknown-unknown
-              rustup +stable target add x86_64-unknown-linux-gnu
-              cargo +nightly --version
-              cargo +stable --version
-              rustc +stable --version
-              rustc +nightly --version
+                rustup target add wasm32-unknown-unknown
+                rustup +stable target add x86_64-unknown-linux-gnu
+                cargo +nightly --version
+                cargo +stable --version
+                rustc +stable --version
+                rustc +nightly --version
 
-              cargo +stable build --release --workspace
+                cargo +stable build --release --workspace
 
-      - task: verify-cargo-test
-        timeout: 40m
-        image: env-glibc
-        config:
-          platform: linux
-          inputs:
-          - name: git-repo
-          caches:
-          - path: cargo
-          run:
-            # user: root
-            dir: git-repo
-            path: sh
-            args:
-            - -exc
-            - |
-              export RUST_BACKTRACE=1
-              export CARGO_HOME="$(pwd)/../cargo"
-              export CARGO_INCREMENTAL=0
+        - task: verify-cargo-test
+          timeout: 60m
+          image: env-glibc
+          config:
+            platform: linux
+            inputs:
+            - name: git-repo
+            caches:
+            - path: cargo
+            run:
+              # user: root
+              dir: git-repo
+              path: sh
+              args:
+              - -exc
+              - |
+                export RUST_BACKTRACE=1
+                export CARGO_HOME="$(pwd)/../cargo"
+                export CARGO_INCREMENTAL=0
 
-              sudo chown $(whoami): -Rf ${CARGO_HOME} .
+                sudo chown $(whoami): -Rf ${CARGO_HOME} .
 
-              rustup target add wasm32-unknown-unknown
-              rustup +stable target add x86_64-unknown-linux-gnu
-              cargo +nightly --version
-              cargo +stable --version
-              rustc +stable --version
-              rustc +nightly --version
+                rustup target add wasm32-unknown-unknown
+                rustup +stable target add x86_64-unknown-linux-gnu
+                cargo +nightly --version
+                cargo +stable --version
+                rustc +stable --version
+                rustc +nightly --version
 
-              cargo +stable test
-
+                cargo +stable test
 
       - task: verify-cargo-fmt
         timeout: 15m

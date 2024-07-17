@@ -144,7 +144,7 @@ jobs:
             context: taplo-fmt
             status: failure
 
-      - do:
+      - in_parallel:
         - task: pr-check-cargo-build
           timeout: 60m
           image: env-glibc
@@ -167,6 +167,7 @@ jobs:
                 export CARGO_INCREMENTAL=0
                 env
 
+                sudo dnf install -y rocksdb-devel rocksdb
                 sudo chown $(whoami): -Rf ${CARGO_HOME}
                 sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
                 sudo chown $(whoami): -Rf .
@@ -219,6 +220,8 @@ jobs:
                 sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
                 sudo chown $(whoami): -Rf .
 
+                sudo dnf install -y rocksdb-devel rocksdb
+
                 rustup +nightly target add wasm32-unknown-unknown
                 rustup +stable target add wasm32-unknown-unknown
                 rustup +stable target add x86_64-unknown-linux-gnu
@@ -266,6 +269,8 @@ jobs:
                 sudo chown $(whoami): -Rf ${CARGO_HOME}
                 sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
                 sudo chown $(whoami): -Rf .
+
+                sudo dnf install -y rocksdb-devel rocksdb
 
                 rustup +nightly target add wasm32-unknown-unknown
                 rustup target add wasm32-unknown-unknown

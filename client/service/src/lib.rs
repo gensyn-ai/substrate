@@ -33,6 +33,7 @@ pub mod client;
 mod client;
 mod metrics;
 mod task_manager;
+use crate::config::Multiaddr;
 
 use std::{collections::HashMap, net::SocketAddr};
 
@@ -45,6 +46,7 @@ use sc_network::{
 	config::MultiaddrWithPeerId, NetworkBlock, NetworkPeers, NetworkStateInfo, PeerId,
 };
 use sc_network_sync::SyncingService;
+use sc_rpc_server::ServerAndListenAddress;
 use sc_utils::mpsc::TracingUnboundedReceiver;
 use sp_blockchain::HeaderMetadata;
 use sp_consensus::SyncOracle;
@@ -96,7 +98,10 @@ const DEFAULT_PROTOCOL_ID: &str = "sup";
 
 /// RPC handlers that can perform RPC queries.
 #[derive(Clone)]
-pub struct RpcHandlers(Arc<RpcModule<()>>);
+pub struct RpcHandlers {
+	rpc_module: Arc<RpcModule<()>>,
+	listen_addresses: Box<[Multiaddr]>,
+}
 
 impl RpcHandlers {
 	/// Starts an RPC query.
@@ -112,7 +117,7 @@ impl RpcHandlers {
 		&self,
 		json_query: &str,
 	) -> Result<(String, mpsc::UnboundedReceiver<String>), JsonRpseeError> {
-		self.0
+		self.rpc_module
 			.raw_json_request(json_query)
 			.await
 			.map(|(method_res, recv)| (method_res.result, recv))
@@ -120,7 +125,12 @@ impl RpcHandlers {
 
 	/// Provides access to the underlying `RpcModule`
 	pub fn handle(&self) -> Arc<RpcModule<()>> {
-		self.0.clone()
+		self.rpc_module.clone()
+	}
+
+	/// Provides access to listen addresses
+	pub fn listen_addresses(&self) -> &[Multiaddr] {
+		&self.listen_addresses[..]
 	}
 }
 
@@ -368,7 +378,7 @@ fn start_rpc_servers<R>(
 	config: &Configuration,
 	gen_rpc_module: R,
 	rpc_id_provider: Option<Box<dyn RpcSubscriptionIdProvider>>,
-) -> Result<Box<dyn std::any::Any + Send + Sync>, error::Error>
+) -> Result<(Box<dyn std::any::Any + Send + Sync>, SocketAddr), error::Error>
 where
 	R: Fn(sc_rpc::DenyUnsafe) -> Result<RpcModule<()>, Error>,
 {
@@ -408,9 +418,13 @@ where
 	// `block_in_place` is a hack to allow callers to call `block_on` prior to
 	// calling `start_rpc_servers`.
 	match tokio::task::block_in_place(|| {
-		config.tokio_handle.block_on(sc_rpc_server::start_server(server_config))
+		config
+			.tokio_handle
+			.block_on(sc_rpc_server::start_server_and_get_listen_address(server_config))
 	}) {
-		Ok(server) => Ok(Box::new(waiting::Server(Some(server)))),
+		Ok(ServerAndListenAddress { handle, listen_addr }) => {
+			Ok((Box::new(waiting::Server(Some(handle))), listen_addr))
+		},
 		Err(e) => Err(Error::Application(e)),
 	}
 }

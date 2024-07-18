@@ -43,7 +43,8 @@ use sc_executor::{
 use sc_keystore::LocalKeystore;
 use sc_network::{
 	config::{FullNetworkConfiguration, SyncMode},
-	NetworkService, NetworkStateInfo, NetworkStatusProvider,
+	multiaddr::Protocol,
+	Multiaddr, NetworkService, NetworkStateInfo, NetworkStatusProvider,
 };
 use sc_network_bitswap::BitswapRequestHandler;
 use sc_network_common::{role::Roles, sync::warp::WarpSyncParams};
@@ -530,10 +531,12 @@ where
 	};
 
 	let (rpc, socket_addr) = start_rpc_servers(&config, gen_rpc_module, rpc_id_provider)?;
+	let mut multiaddr: Multiaddr = socket_addr.ip().into();
+	multiaddr.push(Protocol::Tcp(socket_addr.port()));
 
 	let rpc_handlers = RpcHandlers {
 		rpc_module: Arc::new(gen_rpc_module(sc_rpc::DenyUnsafe::No)?.into()),
-		listen_addresses: Box::new([socket_addr.ip().into()]),
+		listen_addresses: Box::new([multiaddr]),
 	};
 
 	// Spawn informant task

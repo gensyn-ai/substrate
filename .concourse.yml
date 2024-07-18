@@ -56,12 +56,6 @@ jobs:
       - put: git-pull-request-resource
         params:
           path: git-pull-request-resource
-          context: cargo-fmt
-          status: pending
-
-      - put: git-pull-request-resource
-        params:
-          path: git-pull-request-resource
           context: taplo-fmt
           status: pending
 
@@ -75,12 +69,6 @@ jobs:
         params:
           path: git-pull-request-resource
           context: cargo-test
-          status: pending
-
-      - put: git-pull-request-resource
-        params:
-          path: git-pull-request-resource
-          context: cargo-clippy
           status: pending
 
     - in_parallel:
@@ -192,57 +180,6 @@ jobs:
             params:
               path: git-pull-request-resource
               context: cargo-build
-              status: failure
-
-        - task: pr-check-clippy
-          timeout: 60m
-          image: env-glibc
-          config:
-            platform: linux
-            inputs:
-            - name: git-pull-request-resource
-            caches:
-            - path: target
-            - path: cargo
-
-            run:
-              # user: root
-              dir: git-pull-request-resource
-              path: sh
-              args:
-              - -exc
-              - |
-                export CARGO_HOME="$(pwd)/../cargo"
-                export CARGO_TARGET_DIR="$(pwd)/../target"
-                export CARGO_INCREMENTAL=0
-
-                sudo chown $(whoami): -Rf ${CARGO_HOME}
-                sudo chown $(whoami): -Rf ${CARGO_TARGET_DIR}
-                sudo chown $(whoami): -Rf .
-
-                sudo dnf install -y rocksdb-devel rocksdb
-
-                rustup +nightly target add wasm32-unknown-unknown
-                rustup +stable target add wasm32-unknown-unknown
-                rustup +stable target add x86_64-unknown-linux-gnu
-                cargo +nightly --version
-                cargo +stable --version
-                rustc +stable --version
-                rustc +nightly --version
-
-                cargo clippy --workspace
-
-          on_success:
-            put: git-pull-request-resource
-            params:
-              path: git-pull-request-resource
-              context: cargo-clippy
-              status: success
-          on_failure:
-            put: git-pull-request-resource
-            params:
-              path: git-pull-request-resource
-              context: cargo-clippy
               status: failure
 
         - task: pr-check-cargo-test

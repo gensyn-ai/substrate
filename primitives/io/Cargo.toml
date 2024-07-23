@@ -17,7 +17,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 bytes = { version = "1.1.0", default-features = false }
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["bytes"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "bytes",
+] }
 sp-core = { version = "7.0.0", default-features = false, path = "../core" }
 sp-keystore = { version = "0.13.0", default-features = false, optional = true, path = "../keystore" }
 sp-std = { version = "5.0.0", default-features = false, path = "../std" }
@@ -29,9 +31,12 @@ sp-externalities = { version = "0.13.0", default-features = false, path = "../ex
 sp-tracing = { version = "6.0.0", default-features = false, path = "../tracing" }
 log = { version = "0.4.17", optional = true }
 futures = { version = "0.3.21", features = ["thread-pool"], optional = true }
-secp256k1 = { version = "0.24.0", features = ["recovery", "global-context"], optional = true }
+secp256k1 = { version = "0.24.0", features = [
+  "recovery",
+  "global-context",
+], optional = true }
 tracing = { version = "0.1.29", default-features = false }
-tracing-core = { version = "0.1.28", default-features = false}
+tracing-core = { version = "0.1.28", default-features = false }
 
 # Required for backwards compatibility reason, but only used for verifying when `UseDalekExt` is set.
 ed25519-dalek = { version = "1.0.1", default-features = false, optional = true }
@@ -44,29 +49,27 @@ rustversion = "1.0.6"
 [features]
 default = ["std"]
 std = [
-	"bytes/std",
-	"sp-externalities/std",
-	"sp-core/std",
-	"sp-keystore",
-	"codec/std",
-	"sp-std/std",
-	"sp-trie/std",
-	"sp-state-machine/std",
-	"libsecp256k1",
-	"secp256k1",
-	"sp-runtime-interface/std",
-	"sp-tracing/std",
-	"tracing/std",
-	"tracing-core/std",
-	"log",
-	"futures",
-	"ed25519-dalek",
-	"ed25519",
+  "bytes/std",
+  "sp-externalities/std",
+  "sp-core/std",
+  "sp-keystore",
+  "codec/std",
+  "sp-std/std",
+  "sp-trie/std",
+  "sp-state-machine/std",
+  "libsecp256k1",
+  "secp256k1",
+  "sp-runtime-interface/std",
+  "sp-tracing/std",
+  "tracing/std",
+  "tracing-core/std",
+  "log",
+  "futures",
+  "ed25519-dalek",
+  "ed25519",
 ]
 
-with-tracing = [
-	"sp-tracing/with-tracing"
-]
+with-tracing = ["sp-tracing/with-tracing"]
 
 # These two features are used for `no_std` builds for the environments which already provides
 # `#[panic_handler]`, `#[alloc_error_handler]` and `#[global_allocator]`.

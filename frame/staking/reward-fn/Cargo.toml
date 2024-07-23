@@ -19,7 +19,4 @@ sp-arithmetic = { version = "6.0.0", default-features = false, path = "../../../
 
 [features]
 default = ["std"]
-std = [
-	"log/std",
-	"sp-arithmetic/std",
-]
+std = ["log/std", "sp-arithmetic/std"]

@@ -14,8 +14,12 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 # parity
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "derive",
+] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 
 # FRAME
 frame-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../../benchmarking" }
@@ -43,27 +47,27 @@ sp-io = { version = "7.0.0", path = "../../../primitives/io" }
 default = ["std"]
 
 std = [
-	"frame-benchmarking/std",
-	"frame-election-provider-support/std",
-	"frame-support/std",
-	"frame-system/std",
-	"pallet-bags-list/std",
-	"pallet-staking/std",
-	"pallet-nomination-pools/std",
-	"sp-runtime/std",
-	"sp-runtime-interface/std",
-	"sp-staking/std",
-	"sp-std/std",
+  "frame-benchmarking/std",
+  "frame-election-provider-support/std",
+  "frame-support/std",
+  "frame-system/std",
+  "pallet-bags-list/std",
+  "pallet-staking/std",
+  "pallet-nomination-pools/std",
+  "sp-runtime/std",
+  "sp-runtime-interface/std",
+  "sp-staking/std",
+  "sp-std/std",
 ]
 
 runtime-benchmarks = [
-	"frame-election-provider-support/runtime-benchmarks",
-	"frame-system/runtime-benchmarks",
-	"frame-benchmarking/runtime-benchmarks",
-	"sp-runtime/runtime-benchmarks",
-	"sp-staking/runtime-benchmarks",
-	"frame-support/runtime-benchmarks",
-	"pallet-staking/runtime-benchmarks",
-	"pallet-nomination-pools/runtime-benchmarks",
-	"pallet-bags-list/runtime-benchmarks",
+  "frame-election-provider-support/runtime-benchmarks",
+  "frame-system/runtime-benchmarks",
+  "frame-benchmarking/runtime-benchmarks",
+  "sp-runtime/runtime-benchmarks",
+  "sp-staking/runtime-benchmarks",
+  "frame-support/runtime-benchmarks",
+  "pallet-staking/runtime-benchmarks",
+  "pallet-nomination-pools/runtime-benchmarks",
+  "pallet-bags-list/runtime-benchmarks",
 ]

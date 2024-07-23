@@ -18,7 +18,7 @@ name = "node-template"
 
 [dependencies]
 clap = { version = "4.0.9", features = ["derive"] }
-futures = { version = "0.3.21", features = ["thread-pool"]}
+futures = { version = "0.3.21", features = ["thread-pool"] }
 
 sc-cli = { version = "0.10.0-dev", path = "../../../client/cli" }
 sp-core = { version = "7.0.0", path = "../../../primitives/core" }
@@ -71,10 +71,13 @@ substrate-build-script-utils = { version = "3.0.0", path = "../../../utils/build
 default = []
 # Dependencies that are only required if runtime benchmarking should be build.
 runtime-benchmarks = [
-	"node-template-runtime/runtime-benchmarks",
-	"frame-benchmarking/runtime-benchmarks",
-	"frame-benchmarking-cli/runtime-benchmarks",
+  "node-template-runtime/runtime-benchmarks",
+  "frame-benchmarking/runtime-benchmarks",
+  "frame-benchmarking-cli/runtime-benchmarks",
 ]
 # Enable features that allow the runtime to be tried and debugged. Name might be subject to change
 # in the near future.
-try-runtime = ["node-template-runtime/try-runtime", "try-runtime-cli/try-runtime"]
+try-runtime = [
+  "node-template-runtime/try-runtime",
+  "try-runtime-cli/try-runtime",
+]

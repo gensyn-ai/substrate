@@ -14,11 +14,13 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
-	"derive",
-	"max-encoded-len",
+  "derive",
+  "max-encoded-len",
 ] }
 impl-trait-for-tuples = "0.2.2"
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 serde = { version = "1.0.136", features = ["derive"], optional = true }
 frame-benchmarking = { version = "4.0.0-dev", default-features = false, optional = true, path = "../benchmarking" }
 frame-support = { version = "4.0.0-dev", default-features = false, path = "../support" }
@@ -35,19 +37,19 @@ pallet-utility = { version = "4.0.0-dev", path = "../utility" }
 [features]
 default = ["std"]
 std = [
-	"frame-benchmarking?/std",
-	"codec/std",
-	"frame-support/std",
-	"frame-system/std",
-	"pallet-balances/std",
-	"scale-info/std",
-	"serde",
-	"sp-runtime/std",
-	"sp-std/std",
+  "frame-benchmarking?/std",
+  "codec/std",
+  "frame-support/std",
+  "frame-system/std",
+  "pallet-balances/std",
+  "scale-info/std",
+  "serde",
+  "sp-runtime/std",
+  "sp-std/std",
 ]
 runtime-benchmarks = [
-	"frame-benchmarking/runtime-benchmarks",
-	"frame-support/runtime-benchmarks",
-	"frame-system/runtime-benchmarks",
+  "frame-benchmarking/runtime-benchmarks",
+  "frame-support/runtime-benchmarks",
+  "frame-system/runtime-benchmarks",
 ]
 try-runtime = ["frame-support/try-runtime"]

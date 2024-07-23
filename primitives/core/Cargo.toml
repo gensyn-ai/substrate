@@ -13,17 +13,25 @@ documentation = "https://docs.rs/sp-core"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive","max-encoded-len"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "derive",
+  "max-encoded-len",
+] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 log = { version = "0.4.17", default-features = false }
 serde = { version = "1.0.136", optional = true, features = ["derive"] }
 bounded-collections = { version = "0.1.4", default-features = false }
-primitive-types = { version = "0.12.0", default-features = false, features = ["codec", "scale-info"] }
+primitive-types = { version = "0.12.0", default-features = false, features = [
+  "codec",
+  "scale-info",
+] }
 impl-serde = { version = "0.4.0", optional = true }
 hash-db = { version = "0.16.0", default-features = false }
 hash256-std-hasher = { version = "0.15.2", default-features = false }
 bs58 = { version = "0.4.0", default-features = false, optional = true }
-rand = { version = "0.8.5", features = ["small_rng"],  optional = true }
+rand = { version = "0.8.5", features = ["small_rng"], optional = true }
 substrate-bip39 = { version = "0.4.4", optional = true }
 tiny-bip39 = { version = "1.0.0", optional = true }
 regex = { version = "1.6.0", optional = true }
@@ -45,10 +53,18 @@ paste = "1.0.7"
 array-bytes = { version = "4.1", optional = true }
 ed25519-zebra = { version = "3.1.0", default-features = false, optional = true }
 blake2 = { version = "0.10.4", default-features = false, optional = true }
-libsecp256k1 = { version = "0.7", default-features = false, features = ["static-context"], optional = true }
-schnorrkel = { version = "0.9.1", features = ["preaudit_deprecated", "u64_backend"], default-features = false }
+libsecp256k1 = { version = "0.7", default-features = false, features = [
+  "static-context",
+], optional = true }
+schnorrkel = { version = "0.9.1", features = [
+  "preaudit_deprecated",
+  "u64_backend",
+], default-features = false }
 merlin = { version = "2.0", default-features = false }
-secp256k1 = { version = "0.24.0", default-features = false, features = ["recovery", "alloc"], optional = true }
+secp256k1 = { version = "0.24.0", default-features = false, features = [
+  "recovery",
+  "alloc",
+], optional = true }
 ss58-registry = { version = "1.34.0", default-features = false }
 sp-core-hashing = { version = "5.0.0", path = "./hashing", default-features = false, optional = true }
 sp-runtime-interface = { version = "7.0.0", default-features = false, path = "../runtime-interface" }
@@ -70,58 +86,58 @@ bench = false
 [features]
 default = ["std"]
 std = [
-	"merlin/std",
-	"full_crypto",
-	"log/std",
-	"thiserror",
-	"lazy_static",
-	"parking_lot",
-	"bounded-collections/std",
-	"primitive-types/std",
-	"primitive-types/serde",
-	"primitive-types/byteorder",
-	"primitive-types/rustc-hex",
-	"impl-serde",
-	"codec/std",
-	"scale-info/std",
-	"hash256-std-hasher/std",
-	"hash-db/std",
-	"sp-std/std",
-	"serde",
-	"blake2/std",
-	"array-bytes",
-	"ed25519-zebra/std",
-	"bs58/std",
-	"substrate-bip39",
-	"tiny-bip39",
-	"rand",
-	"schnorrkel/std",
-	"regex",
-	"secp256k1/std",
-	"secp256k1/global-context",
-	"sp-core-hashing/std",
-	"sp-debug-derive/std",
-	"sp-externalities",
-	"sp-storage/std",
-	"sp-runtime-interface/std",
-	"ss58-registry/std",
-	"zeroize/alloc",
-	"secrecy/alloc",
-	"futures",
-	"futures/thread-pool",
-	"libsecp256k1/std",
-	"dyn-clonable",
+  "merlin/std",
+  "full_crypto",
+  "log/std",
+  "thiserror",
+  "lazy_static",
+  "parking_lot",
+  "bounded-collections/std",
+  "primitive-types/std",
+  "primitive-types/serde",
+  "primitive-types/byteorder",
+  "primitive-types/rustc-hex",
+  "impl-serde",
+  "codec/std",
+  "scale-info/std",
+  "hash256-std-hasher/std",
+  "hash-db/std",
+  "sp-std/std",
+  "serde",
+  "blake2/std",
+  "array-bytes",
+  "ed25519-zebra/std",
+  "bs58/std",
+  "substrate-bip39",
+  "tiny-bip39",
+  "rand",
+  "schnorrkel/std",
+  "regex",
+  "secp256k1/std",
+  "secp256k1/global-context",
+  "sp-core-hashing/std",
+  "sp-debug-derive/std",
+  "sp-externalities",
+  "sp-storage/std",
+  "sp-runtime-interface/std",
+  "ss58-registry/std",
+  "zeroize/alloc",
+  "secrecy/alloc",
+  "futures",
+  "futures/thread-pool",
+  "libsecp256k1/std",
+  "dyn-clonable",
 ]
 
 # This feature enables all crypto primitives for `no_std` builds like microcontrollers
 # or Intel SGX.
 # For the regular wasm runtime builds this should not be used.
 full_crypto = [
-	"array-bytes",
-	"ed25519-zebra",
-	"blake2",
-	"libsecp256k1",
-	"secp256k1",
-	"sp-core-hashing",
-	"sp-runtime-interface/disable_target_static_assertions",
+  "array-bytes",
+  "ed25519-zebra",
+  "blake2",
+  "libsecp256k1",
+  "secp256k1",
+  "sp-core-hashing",
+  "sp-runtime-interface/disable_target_static_assertions",
 ]

@@ -22,7 +22,4 @@ sp-runtime = { version = "7.0.0", path = "../../primitives/runtime" }
 [features]
 debug = ["array-bytes", "log"]
 default = ["debug", "std"]
-std = [
-    "log/std",
-    "hash-db/std"
-]
+std = ["log/std", "hash-db/std"]

@@ -13,8 +13,12 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 serde = { version = "1.0.136", default-features = false, features = ["derive"] }
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+  "derive",
+] }
+scale-info = { version = "2.5.0", default-features = false, features = [
+  "derive",
+] }
 sp-api = { version = "4.0.0-dev", default-features = false, path = "../../../primitives/api" }
 sp-arithmetic = { version = "6.0.0", default-features = false, path = "../../../primitives/arithmetic" }
 sp-io = { version = "7.0.0", path = "../../../primitives/io", default-features = false }
@@ -25,7 +29,7 @@ sp-runtime = { version = "7.0.0", default-features = false, path = "../../../pri
 sp-core = { version = "7.0.0", default-features = false, path = "../../../primitives/core" }
 sp-std = { version = "5.0.0", default-features = false, path = "../../../primitives/std" }
 sp-version = { version = "5.0.0", default-features = false, path = "../../../primitives/version" }
-trybuild = { version = "1.0.74", features = [ "diff" ] }
+trybuild = { version = "1.0.74", features = ["diff"] }
 pretty_assertions = "1.2.1"
 rustversion = "1.0.6"
 frame-system = { version = "4.0.0-dev", default-features = false, path = "../../system" }
@@ -35,20 +39,20 @@ test-pallet = { package = "frame-support-test-pallet", default-features = false,
 [features]
 default = ["std"]
 std = [
-	"serde/std",
-	"codec/std",
-	"scale-info/std",
-	"frame-benchmarking/std",
-	"frame-support/std",
-	"frame-system/std",
-	"sp-core/std",
-	"sp-std/std",
-	"sp-io/std",
-	"sp-runtime/std",
-	"sp-state-machine",
-	"sp-arithmetic/std",
-	"sp-version/std",
-	"sp-api/std",
+  "serde/std",
+  "codec/std",
+  "scale-info/std",
+  "frame-benchmarking/std",
+  "frame-support/std",
+  "frame-system/std",
+  "sp-core/std",
+  "sp-std/std",
+  "sp-io/std",
+  "sp-runtime/std",
+  "sp-state-machine",
+  "sp-arithmetic/std",
+  "sp-version/std",
+  "sp-api/std",
 ]
 try-runtime = ["frame-support/try-runtime"]
 # WARNING:

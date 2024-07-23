@@ -15,7 +15,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 [workspace]
 
 [dev-dependencies]
-codec = { package = "parity-scale-codec", version = "3.0.0", features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.0.0", features = [
+  "derive",
+] }
 scale-info = { version = "2.0.1", features = ["derive"] }
 log = { version = "0.4.17", default-features = false }
 
@@ -37,4 +39,3 @@ pallet-bags-list = { version = "4.0.0-dev", path = "../../bags-list" }
 pallet-balances = { version = "4.0.0-dev", path = "../../balances" }
 pallet-timestamp = { version = "4.0.0-dev", path = "../../timestamp" }
 pallet-session = { version = "4.0.0-dev", path = "../../session" }
-

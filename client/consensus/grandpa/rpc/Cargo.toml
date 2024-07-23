@@ -12,7 +12,11 @@ homepage = "https://substrate.io"
 [dependencies]
 finality-grandpa = { version = "0.16.2", features = ["derive-codec"] }
 futures = "0.3.16"
-jsonrpsee = { version = "0.16.2", features = ["client-core", "server", "macros"] }
+jsonrpsee = { version = "0.16.2", features = [
+  "client-core",
+  "server",
+  "macros",
+] }
 log = "0.4.8"
 parity-scale-codec = { version = "3.2.2", features = ["derive"] }
 serde = { version = "1.0.105", features = ["derive"] }
@@ -26,7 +30,9 @@ sp-runtime = { version = "7.0.0", path = "../../../../primitives/runtime" }
 
 [dev-dependencies]
 sc-block-builder = { version = "0.10.0-dev", path = "../../../block-builder" }
-sc-rpc = { version = "4.0.0-dev", features = ["test-helpers"], path = "../../../rpc" }
+sc-rpc = { version = "4.0.0-dev", features = [
+  "test-helpers",
+], path = "../../../rpc" }
 sp-core = { version = "7.0.0", path = "../../../../primitives/core" }
 sp-consensus-grandpa = { version = "4.0.0-dev", path = "../../../../primitives/consensus/grandpa" }
 sp-keyring = { version = "7.0.0", path = "../../../../primitives/keyring" }

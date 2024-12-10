@@ -198,10 +198,13 @@ where
 			context,
 		)
 		.set_parent_hash(at_hash);
-		log::error!("CHANGES: {:?}", changes);
 
-		sm.execute_using_consensus_failure_handler(strategy.get_manager())
-			.map_err(Into::into)
+		let rv = sm.execute_using_consensus_failure_handler(strategy.get_manager())
+			.map_err(Into::into);
+		drop(sm);
+
+		log::error!("CHANGES: {:?}", changes);
+		rv
 	}
 
 	fn contextual_call(

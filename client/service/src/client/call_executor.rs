@@ -169,6 +169,7 @@ where
 		strategy: ExecutionStrategy,
 		context: CallContext,
 	) -> sp_blockchain::Result<Vec<u8>> {
+		log::error!("CALL METHOD: {}", method);
 		let mut changes = OverlayedChanges::default();
 		let at_number =
 			self.backend.blockchain().expect_block_number_from_id(&BlockId::Hash(at_hash))?;
@@ -197,6 +198,7 @@ where
 			context,
 		)
 		.set_parent_hash(at_hash);
+		log::error!("CHANGES: {:?}", changes);
 
 		sm.execute_using_consensus_failure_handler(strategy.get_manager())
 			.map_err(Into::into)

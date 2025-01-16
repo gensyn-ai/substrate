@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog].
 
 ## 2.0.1-> 3.0.0 - Apollo 14
 
-Most notably, this is the first release of the new FRAME (2.0) with its new macro-syntax and some changes in types, and pallet versioning. This release also incorporates the faster and improve version 2.0 of the parity-scale-codec and upgraded dependencies all-around. While the `FinalityTracker` pallet has been dropped, this release marks the first public appearance of a few new pallets, too;Bounties, Lottery, Tips (extracted from the `Treasury`-pallet, see #7536) and Merkle-Mountain-Ranges (MMR).
+Most notably, this is the first release of the new FRAME (2.0) with its new macro-syntax and some changes in types, and pallet versioning. This release also incorporates the faster and improved version 2.0 of the parity-scale-codec and upgraded dependencies all-around. While the `FinalityTracker` pallet has been dropped, this release marks the first public appearance of a few new pallets, too;Bounties, Lottery, Tips (extracted from the `Treasury`-pallet, see #7536) and Merkle-Mountain-Ranges (MMR).
 
 On the client side, the most notable changes are around the keystore, making it async and switching to a different signing model allowing for remote-signing to be implemented; and various changes to improve networking and light-client support, like adding the Grandpa warp sync request-response protocol (#7711).
 
@@ -21,7 +21,7 @@ Not too much has changed on the top and API level for developing Substrate betwe
 3. remove everything, copy over the 3.0 node-template
 4. try re-applying your diff, manually, a hunk at a time.
 
-If that doesn't work for you, we are working on an in-depth-guide for all major changes that took place and how you need to adapt your code for it. [You can find the upgrade guide under `docs/` in the repo](https://github.com/paritytech/substrate/blob/master/docs/Upgrading-2.0-to-3.0.md), if you have further questions or problem, please [feel free to ask in the github discussion board](https://github.com/paritytech/substrate/discussions).
+If that doesn't work for you, we are working on an in-depth-guide for all major changes that took place and how you need to adapt your code for it. [You can find the upgrade guide under `docs/` in the repo](https://github.com/paritytech/substrate/blob/master/docs/Upgrading-2.0-to-3.0.md), if you have further questions or problems, please [feel free to ask in the github discussion board](https://github.com/paritytech/substrate/discussions).
 
 
 Runtime

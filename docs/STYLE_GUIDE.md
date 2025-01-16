@@ -39,7 +39,7 @@ fn calculate(
 		// same line, only one indent level is used
 		some_long_variable_b * some_long_variable_b
 		- 4 * some_long_variable_a * some_long_variable_c
-	// both closed here at beginning of line, so back to the original indent
+	// both closed here at the beginning of the line, so back to the original indent
 	// level
 	)) / (2 * some_long_variable_a)
 }
@@ -70,7 +70,7 @@ fn foo(really_long_parameter_name_1: SomeLongTypeName, really_long_parameter_nam
 
 ```rust
 {
-	// Complex line (not just a function call, also a let statement). Full
+	// Complex line (not just a function call, but also a let statement). Full
 	// structure.
 	let (a, b) = bar(
 		really_long_parameter_name_1,
@@ -97,7 +97,7 @@ fn foo(really_long_parameter_name_1: SomeLongTypeName, really_long_parameter_nam
 ```rust
 struct Point<T> {
 	x: T,
-	y: T,    // <-- Multiline comma-delimited lists end with a trailing ,
+	y: T,    // <-- Multiline comma-delimited lists end with a trailing,
 }
 
 // Single line comma-delimited items do not have a trailing `,`
@@ -141,7 +141,7 @@ let mut target_path =
 
 -   Unsafe code requires explicit proofs just as panickers do. When introducing unsafe code,
     consider trade-offs between efficiency on one hand and reliability, maintenance costs, and
-    security on the other. Here is a list of questions that may help evaluating the trade-off while
+    security on the other. Here is a list of questions that may help evaluate the trade-off while
     preparing or reviewing a PR:
     -   how much more performant or compact the resulting code will be using unsafe code,
     -   how likely is it that invariants could be violated,

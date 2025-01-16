@@ -3,7 +3,7 @@
 **Note :: This pallet is tightly coupled to pallet-treasury**
 
 A subsystem to allow for an agile "tipping" process, whereby a reward may be given without first
-having a pre-determined stakeholder group come to consensus on how much should be paid.
+having a pre-determined stakeholder group come to a consensus on how much should be paid.
 
 A group of `Tippers` is determined through the config `Config`. After half of these have declared
 some amount that they believe a particular reported reason deserves, then a countdown period is
@@ -15,8 +15,8 @@ any finders fee, in case of a public (and bonded) original report.
 
 - **Tipping:** The process of gathering declarations of amounts to tip and taking the median amount
   to be transferred from the treasury to a beneficiary account.
-- **Tip Reason:** The reason for a tip; generally a URL which embodies or explains why a particular
-  individual (identified by an account ID) is worthy of a recognition by the treasury.
+- **Tip Reason:** The reason for a tip; is generally a URL that embodies or explains why a particular
+  individual (identified by an account ID) is worthy of recognition by the treasury.
 - **Finder:** The original public reporter of some reason for tipping.
 - **Finders Fee:** Some proportion of the tip amount that is paid to the reporter of  the tip,
   rather than the main beneficiary.

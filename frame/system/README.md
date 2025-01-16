@@ -10,10 +10,10 @@ It acts as the base layer for other pallets to interact with the Substrate frame
 The System module defines the core data types used in a Substrate runtime.
 It also provides several utility functions (see [`Pallet`](https://docs.rs/frame-system/latest/frame_system/pallet/struct.Pallet.html)) for other FRAME pallets.
 
-In addition, it manages the storage items for extrinsics data, indexes, event records, and digest items,
+In addition, it manages the storage items for extrinsic data, indexes, event records, and digest items,
 among other things that support the execution of the current block.
 
-It also handles low-level tasks like depositing logs, basic set up and take down of
+It also handles low-level tasks like depositing logs, basic setup up and take down of
 temporary storage entries, and access to previous block hashes.
 
 ## Interface
@@ -30,7 +30,7 @@ See the [`Pallet`](https://docs.rs/frame-system/latest/frame_system/pallet/struc
 
 The System module defines the following extensions:
 
-  - [`CheckWeight`]: Checks the weight and length of the block and ensure that it does not
+  - [`CheckWeight`]: Checks the weight and length of the block and ensures that it does not
     exceed the limits.
   - [`CheckNonce`]: Checks the nonce of the transaction. Contains a single payload of type
     `T::Index`.

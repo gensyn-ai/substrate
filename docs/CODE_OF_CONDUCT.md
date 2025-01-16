@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to make participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
 
 ## Our Standards
 
@@ -20,20 +20,20 @@ Examples of unacceptable behavior by participants include:
 * Trolling, insulting/derogatory comments, and personal or political attacks
 * Public or private harassment
 * Publishing others' private information, such as a physical or electronic address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+* Other conduct that could reasonably be considered inappropriate in a professional setting
 
 ### Facilitation, Not Strongarming
 
-We recognise that this software is merely a tool for users to create and maintain their blockchain of preference. We see that blockchains are naturally community platforms with users being the ultimate decision makers. We assert that good software will maximise user agency by facilitate user-expression on the network. As such:
+We recognize that this software is merely a tool for users to create and maintain their blockchain of preference. We see that blockchains are naturally community platforms with users being the ultimate decision makers. We assert that good software will maximise user agency by facilitate user expression on the network. As such:
 
 * This project will strive to give users as much choice as is both reasonable and possible over what protocol they adhere to; but
-* use of the project's technical forums, commenting systems, pull requests and issue trackers as a means to express individual protocol preferences is forbidden.
+* use of the project's technical forums, commenting systems, pull requests, and issue trackers as a means to express individual protocol preferences is forbidden.
 
 ## Our Responsibilities
 
 Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned with this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
 
 ## Scope
 
